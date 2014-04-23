@@ -9,11 +9,18 @@
     <script type="text/javascript">
         var BASE_URL = 'http://localhost:8000';
     </script> 
-
     <script type="text/javascript" src="feed.js"></script>
+    <script type="text/javascript">
+        feed('feed', 534, function(data) {
+
+        }, {
+            //check_timeout: 1000,
+            //url: "/js-api/unread-feed-item/",
+        });
+    </script>
     <title>Test</title>
 </head>
 <body>
-
+    <div id="feed"></div>
 </body>
 </html>

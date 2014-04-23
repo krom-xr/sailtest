@@ -1,6 +1,9 @@
 /*global BASE_URL*/
 var feed = function(dom_el_id, user_id, fn, options) {
 
+    if (!dom_el_id) { throw new Error('you must set element id'); }
+    if (!user_id) { throw new Error('you must set user_id'); }
+
     var feed_ob = {
         generateCallbackName: function() {
             return 'callb_' + new Date().getTime();
@@ -35,8 +38,24 @@ var feed = function(dom_el_id, user_id, fn, options) {
         stopChecking: function() {
             clearInterval(this.interval);
         },
+        getContainer: function() {
+            if (!this._container) {
+                var el = document.getElementById(dom_el_id);
+                var ul = document.createElement('ul');
+                this._container = ul;
+                el.appendChild(ul);
+            }
+            return this._container;
+        },
         render: function(data) {
-            console.log(data);
+            if (!data) { return; }
+            var it = feed_ob;
+            var container = it.getContainer(); 
+            var li = document.createElement('li');
+
+            li.innerHTML = 'tessst' + new Date().getTime();
+
+            container.insertBefore(li, container.firstChild);
         }
     };
 
@@ -48,19 +67,3 @@ var feed = function(dom_el_id, user_id, fn, options) {
     feed_ob.startChecking();
     return feed_ob;
 }
-
-feed('feed', 534, function() {
-
-}, {
-    check_timeout: 1000,
-    url: "/js-api/unread-feed-item/",
-});
-
-//feed().setSettings({
-    //user_id: 534,
-    //check_timeout: 1000
-//}).startChecking();
-
-//setTimeout(function() {
-    //feed.stopChecking();
-//}, 10000);
