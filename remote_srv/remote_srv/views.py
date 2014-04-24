@@ -19,5 +19,5 @@ def unread_feed(request):
         'points': random.randrange(100)
     })
 
-    result = "{0}({1})".format(callbacknf, result_json)
-    return HttpResponse(result)
+    result = "{0}({1})".format(callbacknf, random.choice([result_json, ""]))
+    return HttpResponse(result, mimetype="application/json")
