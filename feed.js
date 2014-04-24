@@ -30,9 +30,9 @@ var feed = function(dom_el_id, user_id, fn, options) {
         },
         startChecking: function(timeout) {
             var it = this;
-            it.getFeed(it.url, it.user_id, it.render);
+            it.getFeed(it.url, user_id, it.render);
             it.interval = setInterval(function() {
-                it.getFeed(it.url, it.user_id, it.render);
+                it.getFeed(it.url, user_id, it.render);
             }, it.check_timeout);
         },
         stopChecking: function() {
@@ -41,9 +41,11 @@ var feed = function(dom_el_id, user_id, fn, options) {
         getContainer: function() {
             if (!this._container) {
                 var el = document.getElementById(dom_el_id);
-                var ul = document.createElement('ul');
-                this._container = ul;
-                el.appendChild(ul);
+                var table = document.createElement('table');
+                table.className = "table table-stripped table-bordered";
+                this._container = table;
+                table.innerHTML = "<tr> <th>pic</th> <th>activityType</th> <th>points</th> <th>message</th> </tr>";
+                el.appendChild(table);
             }
             return this._container;
         },
@@ -51,17 +53,20 @@ var feed = function(dom_el_id, user_id, fn, options) {
             if (!data) { return; }
             var it = feed_ob;
             var container = it.getContainer(); 
-            var li = document.createElement('li');
+            var tr = document.createElement('tr');
 
             console.log(data);
             //li.innerHTML = 'tessst' + new Date().getTime();
-            li.innerHTML = "" +
-                " <img src='" + data.pic + "' style='width: 50px; height: 50px' />" +
-                " <b>activityType:</b> " + data.activityType +
-                " <b>points:</b> " + data.points + 
-                " <b>message:</b> " + data.message;
+            tr.innerHTML = "" +
+                "<tr>" +
+                    "<td> <img src='" + data.pic + "' style='width: 50px; height: 50px' /></td>" +
+                    "<td><p>" + data.activityType + "</p></td>" +
+                    "<td>" + data.points +  "</td>" +
+                    "<td>" + data.message + "</td>" +
+                "</tr>";
 
-            container.insertBefore(li, container.firstChild);
+            //container.insertBefore(tr, container.children[1]);
+            container.appendChild(tr);//, container.children[1]);
         }
     };
 
