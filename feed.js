@@ -26,7 +26,7 @@ var feed = function(dom_el_id, user_id, fn, options) {
                 delete window[callback_name];
             };
             script.onerror = function(e) { console.error(e); };
-            script.src = BASE_URL + url + '?callback=' + callback_name + '&user_id=' + user_id;
+            script.src = url + '?callback=' + callback_name + '&user_id=' + user_id;
         },
         startChecking: function(timeout) {
             var it = this;
@@ -55,8 +55,6 @@ var feed = function(dom_el_id, user_id, fn, options) {
             var container = it.getContainer(); 
             var tr = document.createElement('tr');
 
-            console.log(data);
-            //li.innerHTML = 'tessst' + new Date().getTime();
             tr.innerHTML = "" +
                 "<tr>" +
                     "<td> <img src='" + data.pic + "' style='width: 50px; height: 50px' /></td>" +
@@ -65,15 +63,15 @@ var feed = function(dom_el_id, user_id, fn, options) {
                     "<td>" + data.message + "</td>" +
                 "</tr>";
 
-            //container.insertBefore(tr, container.children[1]);
-            container.appendChild(tr);//, container.children[1]);
+            container.insertBefore(tr, container.children[1]);
+            fn && fn(data);
         }
     };
 
     options = options || {};    
 
     feed_ob.check_timeout = options.check_timeout || 5000;
-    feed_ob.url = options.url || "/js-api/unread-feed-item/";
+    feed_ob.url = options.url || BASE_URL + "/js-api/unread-feed-item/";
 
     feed_ob.startChecking();
     return feed_ob;

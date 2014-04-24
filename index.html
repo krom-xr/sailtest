@@ -2,31 +2,38 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
-
-
 
     <script type="text/javascript">
         var BASE_URL = 'http://localhost:8000';
     </script> 
+
     <script type="text/javascript" src="feed.js"></script>
     <script type="text/javascript">
-        feed('feed', 534, function(data) {
 
+        feed('feed', 534, function(data) {
+            console.log('callback for user site - ', data);
         }, {
-            //check_timeout: 1000,
+            check_timeout: 1000,
             //url: "/js-api/unread-feed-item/",
         });
+
     </script>
     <title>Test</title>
+    <style type="text/css">
+        table {
+            width: 100%;
+            text-align: center;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+        table td {
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+    </style>
 </head>
 <body>
-    <div class="container container-fluid">
-        <div id="feed" style="width: 50%" class="table-responsive">
-
-            <table class="table table-stripped table-bordered"><tbody><tr> <th>pic</th> <th>activityType</th> <th>points</th> <th>message</th> </tr></tbody><tr><td> <img style="width: 50px; height: 50px" src="http://python.jpg.to"></td><td><p>badge</p></td><td>100</td><td>Новое cообщение</td></tr><tr><td> <img style="width: 50px; height: 50px" src="http://python.jpg.to"></td><td><p>badge</p></td><td>100</td><td>Новое cообщение</td></tr><tr><td> <img style="width: 50px; height: 50px" src="http://python.jpg.to"></td><td><p>badge</p></td><td>100</td><td>Новое cообщение</td></tr><tr><td> <img style="width: 50px; height: 50px" src="http://python.jpg.to"></td><td><p>badge</p></td><td>100</td><td>Новое cообщение</td></tr></table>
-        </div>
-    </div>
+    <div id="feed" style="width: 50%" class="table-responsive"></div>
 
 </body>
 </html>
