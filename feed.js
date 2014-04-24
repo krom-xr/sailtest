@@ -53,7 +53,13 @@ var feed = function(dom_el_id, user_id, fn, options) {
             var container = it.getContainer(); 
             var li = document.createElement('li');
 
-            li.innerHTML = 'tessst' + new Date().getTime();
+            console.log(data);
+            //li.innerHTML = 'tessst' + new Date().getTime();
+            li.innerHTML = "" +
+                " <img src='" + data.pic + "' style='width: 50px; height: 50px' />" +
+                " <b>activityType:</b> " + data.activityType +
+                " <b>points:</b> " + data.points + 
+                " <b>message:</b> " + data.message;
 
             container.insertBefore(li, container.firstChild);
         }

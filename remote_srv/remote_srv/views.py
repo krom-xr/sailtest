@@ -15,6 +15,7 @@ def unread_feed(request):
         'activityType': 'badge',
         'pic': 'http://python.jpg.to',
         'message': u'Новое cообщение',
+        'points': '100'
     })
 
     result = "{0}({1})".format(callbacknf, result_json)
